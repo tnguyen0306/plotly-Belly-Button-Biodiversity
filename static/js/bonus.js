@@ -9,7 +9,7 @@ function gaugeChart(id) {
         var data = [
             {
                 domain: { x: [0, 1], y: [0, 1] },
-                value: metaData[wfreq],
+                value: metaData.wfreq,
                 title: { text: "Belly Button Washing Frequency"},
                 type: "indicator",
                 mode: "gauge",
@@ -30,18 +30,10 @@ function gaugeChart(id) {
             }
         ];
         
-        var layout = { width: 600, height: 450, margin: { t: 0, b: 0 } };
+        var layout = { width: 450, height: 375, margin: { t: 0, b: 0 } };
         
         Plotly.newPlot('gauge', data, layout);
     
     });
 }
 
-
-// Create function for changing id
-function optionChanged(id) {
-    gaugeChart(id);
-}
-
-
-init();
