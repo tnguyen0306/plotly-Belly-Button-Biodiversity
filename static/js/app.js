@@ -53,7 +53,30 @@ function buildPlots(id) {
 
     });
 }
-  
+
+// Create the function to get demographic data
+function demoInfo(id) {
+        
+    // Read samples.json
+    d3.json("samples.json").then((data)=> {
+
+        // Retrieve meta data info by chosen id
+        var metaData = data.metadata.filter(meta => meta.id.toString() === id)[0];
+    
+        // Select demographic panel to put data
+        var demographicInfo = d3.select("#sample-metadata");
+        
+        // Empty the demographic info panel
+        demographicInfo.html("");
+
+        // Append demographic info to the panel
+        Object.entries(metaData).forEach((key) => {   
+            demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
+
+        });
+        
+    });
+}
 
 // Create function for changing id
 function optionChanged(id) {
