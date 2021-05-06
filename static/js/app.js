@@ -1,3 +1,23 @@
+// Create function for initial data rendering
+function init() {
+    
+    // Select dropdown menu 
+    var dropdown = d3.select("#selDataset");
+    
+    // Read data 
+    d3.json("samples.json").then((data)=> {
+    
+        // Retrieve id data to the dropdown menu
+        data.names.forEach(function(name) {
+            dropdown.append("option").text(name).property("value");
+        });
+    
+        // Call functions to display
+        buildPlots(data.names[0]);
+        demoInfo(data.names[0]);
+    });
+}
+
 // Create function to build plots
 function buildPlots(id) {
         
@@ -74,7 +94,7 @@ function demoInfo(id) {
             demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
 
         });
-        
+
     });
 }
 
@@ -83,25 +103,6 @@ function optionChanged(id) {
     buildPlots(id);
     demoInfo(id);
 }
-    
-// Create function for initial data rendering
-function init() {
-    
-    // Select dropdown menu 
-    var dropdown = d3.select("#selDataset");
-    
-    // Read data 
-    d3.json("samples.json").then((data)=> {
-    
-        // Retrieve id data to the dropdown menu
-        data.names.forEach(function(name) {
-            dropdown.append("option").text(name).property("value");
-        });
-    
-        // Call functions to display
-        buildPlots(data.names[0]);
 
-    });
-}
 
 init();
