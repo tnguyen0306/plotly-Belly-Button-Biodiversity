@@ -1,3 +1,4 @@
+// Create function to build plots
 function buildPlots(id) {
         
     // Read samples.json
@@ -14,6 +15,29 @@ function buildPlots(id) {
 
         // Retrieve top 10 labels for the plot
         var labels = sampleData.samples[0].otu_labels.slice(0,10);
+
+        // Create trace object for bar plot
+        var trace = {
+            x: sampleValues,
+            y: idOTU,
+            text: labels,
+            type:"bar",
+            orientation: "h",
+            marker: {
+                color: 'rgb(51, 122, 183)'}
+        };
+
+        // Create a data array
+        var data = [trace];
+    
+        // Use `layout` to define a title
+        var layout = {
+            title: "Top 10 Bacteria Cultures Found",
+        };
+    
+        // Render the plot to the `bar` div
+        Plotly.newPlot("bar", data, layout);
+
     });
 }
   
