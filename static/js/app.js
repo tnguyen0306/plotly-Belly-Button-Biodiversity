@@ -1,28 +1,47 @@
-// Initializes the page with a default plot and data
-function init() {
-    // Grab values from the data json object
-    d3.json("samples.json").then(function(data){
-    var dataSet = data;
-    displayMetaData(940,dataSet);
-    
-    // Use D3 to select the dropdown menu
-    var optionMenu = d3.select("#selDataset");
-    data.names.forEach(function(name){
-      optionMenu.append("option").text(name);
+function buildPlots(id) {
+        
+    // Read samples.json
+    d3.json("samples.json").then (sampleData =>{
+
+        // Retrieve top 10 sample values
+        var sampleValues =  sampleData.samples[0].sample_values.slice(0,10).reverse();
+        
+        // Retrieve only top 10 otu ids for the plot OTU and reversing it. 
+        var topOTU = (sampleData.samples[0].otu_ids.slice(0, 10)).reverse();
+
+        // Retrieve otu id's to the desired form for the plot
+        var idOTU = topOTU.map(d => "OTU " + d);
+
+        // Retrieve top 10 labels for the plot
+        var labels = sampleData.samples[0].otu_labels.slice(0,10);
     });
- })
 }
+  
 
-// Function for displaying the chosen data from dropdown menu
-function optionChanged(value) {
-    var option = value;
-    displayMetaData(option,dataSet);
+// Create function for changing id
+function optionChanged(id) {
+    buildPlots(id);
+    demoInfo(id);
 }
+    
+// Create function for initial data rendering
+function init() {
+    
+    // Select dropdown menu 
+    var dropdown = d3.select("#selDataset");
+    
+    // Read data 
+    d3.json("samples.json").then((data)=> {
+    
+        // Retrieve id data to the dropdown menu
+        data.names.forEach(function(name) {
+            dropdown.append("option").text(name).property("value");
+        });
+    
+        // Call functions to display
+        buildPlots(data.names[0]);
 
-// Display data in Demographic Info
-function displayMetaData(option,dataSet) {
-    var mtdata = dataSet.metadata.filter(row => row.id == option);
-    d3.select("#sample-metadata").html(displayObject(mtdata[0]));
+    });
 }
 
 init();
