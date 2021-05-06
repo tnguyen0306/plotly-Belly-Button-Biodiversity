@@ -43,11 +43,6 @@ function gaugeChart(id) {
               { range: [7, 8], color: "#64a5a6" },
               { range: [8, 9], color: "#4b9a9a" }
             ],
-            threshold: {
-              line: { color: "red", width: 4 },
-              thickness: 0.75,
-              value: 490
-            }
           }
         }
       ];
