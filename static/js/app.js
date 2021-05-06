@@ -15,6 +15,7 @@ function init() {
         // Call functions to display
         buildPlots(data.names[0]);
         demoInfo(data.names[0]);
+        gaugeChart(data.names[0]);
     });
 }
 
@@ -102,6 +103,7 @@ function demoInfo(id) {
 function optionChanged(id) {
     buildPlots(id);
     demoInfo(id);
+    gaugeChart(id);
 }
 
 

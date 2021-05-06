@@ -10,11 +10,16 @@ function gaugeChart(id) {
             {
                 domain: { x: [0, 1], y: [0, 1] },
                 value: metaData.wfreq,
-                title: { text: "Belly Button Washing Frequency"},
+                title: { 
+                    text: "Belly Button Washing Frequency"
+                },
                 type: "indicator",
                 mode: "gauge",
                 gauge: {
-                    axis: { range: [0, 9] },
+                    axis: { 
+                        range: [0, 9],
+                        dtick: 1
+                    },
                     steps: [
                         { range: [0, 1], color: "#f4f8f8" },
                         { range: [1, 2], color: "#e9f2f2" },
@@ -25,7 +30,7 @@ function gaugeChart(id) {
                         { range: [6, 7], color: "#7bb3b3" },
                         { range: [7, 8], color: "#64a5a6" },
                         { range: [8, 9], color: "#4b9a9a" }
-                    ]
+                    ],
                 }
             }
         ];
