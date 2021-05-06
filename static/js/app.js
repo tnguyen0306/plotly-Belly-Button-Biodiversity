@@ -4,27 +4,16 @@ function buildPlots(id) {
     // Read samples.json
     d3.json("samples.json").then (sampleData =>{
 
-        // Retrieve top 10 sample values
-        var sampleValues =  sampleData.samples[0].sample_values.slice(0,10).reverse();
-        
-        // Retrieve only top 10 otu ids for the plot OTU and reversing it. 
-        var topOTU = (sampleData.samples[0].otu_ids.slice(0, 10)).reverse();
-
-        // Retrieve otu id's to the desired form for the plot
-        var idOTU = topOTU.map(d => "OTU " + d);
-
-        // Retrieve top 10 labels for the plot
-        var labels = sampleData.samples[0].otu_labels.slice(0,10);
-
         // Create trace object for bar plot
         var trace1 = {
-            x: sampleValues,
-            y: idOTU,
-            text: labels,
-            type:"bar",
+            x: sampleData.samples[0].sample_values.slice(0, 10).reverse(),
+            y: (sampleData.samples[0].otu_ids.slice(0, 10)).reverse().map(d => "OTU " + d),
+            text: sampleData.samples[0].otu_labels.slice(0, 10),
+            type: "bar",
             orientation: "h",
             marker: {
-                color: 'rgb(51, 122, 183)'}
+                color: 'rgb(51, 122, 183)'
+            }
         };
 
         // Create a data array
@@ -42,8 +31,8 @@ function buildPlots(id) {
         var trace2 = {
             x: sampleData.samples[0].otu_ids,
             y: sampleData.samples[0].sample_values,
-            mode: "markers",
             text:  sampleData.samples[0].otu_labels,
+            mode: "markers",
             marker: {
                 size: sampleData.samples[0].sample_values,
                 color: sampleData.samples[0].otu_ids
