@@ -17,7 +17,7 @@ function buildPlots(id) {
         var labels = sampleData.samples[0].otu_labels.slice(0,10);
 
         // Create trace object for bar plot
-        var trace = {
+        var trace1 = {
             x: sampleValues,
             y: idOTU,
             text: labels,
@@ -28,15 +28,39 @@ function buildPlots(id) {
         };
 
         // Create a data array
-        var data = [trace];
+        var data1 = [trace1];
     
         // Use `layout` to define a title
-        var layout = {
+        var layout1 = {
             title: "Top 10 Bacteria Cultures Found",
         };
     
         // Render the plot to the `bar` div
-        Plotly.newPlot("bar", data, layout);
+        Plotly.newPlot("bar", data1, layout1);
+
+        // Create trace object for bubble plot
+        var trace2 = {
+            x: sampleData.samples[0].otu_ids,
+            y: sampleData.samples[0].sample_values,
+            mode: "markers",
+            text:  sampleData.samples[0].otu_labels,
+            marker: {
+                size: sampleData.samples[0].sample_values,
+                color: sampleData.samples[0].otu_ids
+            }
+        };
+            
+        // Create a data array 
+        var data2 = [trace2];
+
+        // Use `layout` to define a title and x axis label
+        var layout2 = {
+            title: "Bacteria Cultures Per Sample",
+            xaxis:{title: "OTU ID"}
+        };
+    
+        // Render the plot to the `bubble` div
+        Plotly.newPlot("bubble", data2, layout2); 
 
     });
 }
