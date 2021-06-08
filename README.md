@@ -1,6 +1,6 @@
 # Plot.ly Homework - Belly Button Biodiversity
 
-Visit [this website](https://tnguyen0306.github.io/plotly-challenge/) for the final result.
+Visit [this website](https://tnguyen0306.github.io/plotly-Belly-Button-Biodiversity/) for the final result.
 
 ![result](images/home.png)
 
